@@ -2,27 +2,22 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.ArrayList;
 
 
 public class GameBoard extends JPanel implements MouseListener {
 
-    private static final int BOARD_WIDTH = 40;
-    private static final int BOARD_HEIGHT = 30;
+    private static final int BOARD_WIDTH = 5;
+    private static final int BOARD_HEIGHT = 5;
+    private BlockManager blockManager;
 
+    private Block temp;
 
-    private ArrayList<Block> blocks;
 
     GameBoard() {
         setFocusable(true);
 
-        blocks = new ArrayList<>();
-        for (int i = 0; i < BOARD_WIDTH; ++i) {
-            for (int j = 0; j < BOARD_HEIGHT; ++j) {
-                blocks.add(new OpenSpace(i, j));
+        blockManager = new BlockManager(BOARD_WIDTH, BOARD_HEIGHT);
 
-            }
-        }
         addMouseListener(this);
     }
 
@@ -32,11 +27,16 @@ public class GameBoard extends JPanel implements MouseListener {
         super.paintComponent(g);
 
         Graphics2D g2d = (Graphics2D) g;
-        for (Block block : blocks) {
-            int x = ((OpenSpace) block).getX();
-            int y = ((OpenSpace) block).getY();
-            g2d.drawRect(x, y, 20, 20);
+        for (Block block : blockManager.getBlocks()) {
+            int x = block.getX();
+            int y = block.getY();
+            g2d.setColor(block.getColor());
+            g2d.fill3DRect(x, y, 20, 20, true);
+            g2d.setColor(Color.BLACK);
+            g2d.draw3DRect(x, y, 20, 20, true);
+
         }
+        System.out.println(blockManager.getBlocks().size());
 
 
     }
@@ -44,19 +44,21 @@ public class GameBoard extends JPanel implements MouseListener {
     @Override
     public void mouseClicked(MouseEvent e) {
 
-        blocks.add(new OpenSpace(e.getX() / 20, e.getY() / 20));
+        blockManager.setBlock(new Coordinate(e.getX() / 20, e.getY() / 20), new Wall(e.getX() / 20, e.getY() / 20));
         repaint();
 
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
+        System.out.println("pressed");
+
 
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-
+        System.out.println("released");
     }
 
     @Override

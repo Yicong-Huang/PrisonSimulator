@@ -1,11 +1,11 @@
 import java.awt.*;
 
-public class OpenSpace extends Block {
+public class Wall extends Block {
 
-    private Color color = Color.GREEN;
+    private Color color = Color.YELLOW;
 
-    public OpenSpace(int x, int y) {
-        coordinate= new Coordinate(x, y);
+    public Wall(int x, int y) {
+        coordinate = new Coordinate(x, y);
     }
 
 

@@ -3,12 +3,6 @@ import javax.swing.*;
 class PrisonSimulation extends JFrame {
 
     PrisonSimulation() {
-
-        initUI();
-    }
-
-    private void initUI() {
-
         add(new GameBoard());
 
         setSize(800, 600);
