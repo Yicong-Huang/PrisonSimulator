@@ -5,7 +5,7 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 
-public class GameWindow extends JPanel implements MouseListener {
+public class GameBoard extends JPanel implements MouseListener {
 
     private static final int BOARD_WIDTH = 40;
     private static final int BOARD_HEIGHT = 30;
@@ -13,7 +13,7 @@ public class GameWindow extends JPanel implements MouseListener {
 
     private ArrayList<Block> blocks;
 
-    public GameWindow() {
+    GameBoard() {
         setFocusable(true);
 
         blocks = new ArrayList<>();
