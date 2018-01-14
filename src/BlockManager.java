@@ -1,3 +1,7 @@
+import base.Coordinate;
+import block.Block;
+import block.OpenSpace;
+
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
