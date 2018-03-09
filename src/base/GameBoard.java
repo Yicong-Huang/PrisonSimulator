@@ -3,12 +3,16 @@ package base;
 import block.Block;
 import block.BlockManager;
 import exception.MultiplePreviewError;
+import job.Job;
+import job.JobType;
+import location.Location;
 
 import javax.swing.*;
 import javax.swing.event.MouseInputListener;
 import java.awt.*;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 
 public class GameBoard extends JPanel implements MouseInputListener {
@@ -19,7 +23,7 @@ public class GameBoard extends JPanel implements MouseInputListener {
 
     private Coordinate temp;
 
-    private ArrayList<Block> tempBlocks;
+    private Set<Block> tempBlocks;
 
 
     GameBoard() {
@@ -73,6 +77,11 @@ public class GameBoard extends JPanel implements MouseInputListener {
     public void mouseReleased(MouseEvent e) {
 
 //        System.out.println("in GameBoard Release");
+        for (Block block : tempBlocks) {
+
+            PrisonSimulation.jobManager.add(new Job(JobType.BUILD, new Location(block.getCoordinate())));
+        }
+        System.out.println(PrisonSimulation.jobManager);
         tempBlocks = null;
 
     }
@@ -99,7 +108,7 @@ public class GameBoard extends JPanel implements MouseInputListener {
             }
         }
 
-        tempBlocks = new ArrayList<>();
+        tempBlocks = new HashSet<>();
         int eventX = e.getX() / Block.WIDTH;
         int eventY = e.getY() / Block.HEIGHT;
         int initX = temp.getX();
@@ -144,15 +153,15 @@ public class GameBoard extends JPanel implements MouseInputListener {
             for (int j = start.getY(); j <= end.getY(); j++)
                 try {
                     if (i == start.getX() || i == end.getX() || j == start.getY() || j == end.getY()) {
-
-
                         blockManager.getBlock(new Coordinate(i, j)).addPreview(new Preview());
                         tempBlocks.add(blockManager.getBlock(new Coordinate(i, j)));
+
                     }
 
                 } catch (MultiplePreviewError ignored) {
                 }
         }
+
     }
 
     @Override

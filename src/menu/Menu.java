@@ -33,6 +33,7 @@ public class Menu extends JButton implements ActionListener {
 
 
             start.main(new String[]{});
+            PrisonSimulation.jobManager.reSet();
         }
     }
 }
