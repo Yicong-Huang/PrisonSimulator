@@ -7,6 +7,8 @@ import exception.MultiplePreviewError;
 import java.awt.*;
 
 public abstract class Block {
+    public static final int WIDTH = 20;
+    public static final int HEIGHT = 20;
 
 
     public static int id;
@@ -14,11 +16,11 @@ public abstract class Block {
     Coordinate coordinate;
 
     public int getX() {
-        return coordinate.getX() * 20;
+        return coordinate.getX() * WIDTH;
     }
 
     public int getY() {
-        return coordinate.getY() * 20;
+        return coordinate.getY() * HEIGHT;
     }
 
     public Coordinate getCoordinate() {

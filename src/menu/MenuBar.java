@@ -14,7 +14,9 @@ public class MenuBar extends JPanel implements MouseListener {
 
         setLayout(new FlowLayout());
         add(new Menu("Selector"));
-        add(new Menu("Runner"));
+        add(new Menu("Object"));
+//        add(new Menu("Hello"));
+        add(new Menu("Reload Simulation"));
         setBounds(0, 400, 400, 100);
         setVisible(true);
         addMouseListener(this);

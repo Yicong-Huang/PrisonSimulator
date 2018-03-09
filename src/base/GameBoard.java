@@ -1,6 +1,7 @@
-import base.Coordinate;
-import base.Preview;
+package base;
+
 import block.Block;
+import block.BlockManager;
 import exception.MultiplePreviewError;
 
 import javax.swing.*;
@@ -99,43 +100,59 @@ public class GameBoard extends JPanel implements MouseInputListener {
         }
 
         tempBlocks = new ArrayList<>();
-        int eventX = e.getX() / 20;
-        int eventY = e.getY() / 20;
+        int eventX = e.getX() / Block.WIDTH;
+        int eventY = e.getY() / Block.HEIGHT;
         int initX = temp.getX();
         int initY = temp.getY();
-        int startX, endX, startY, endY;
+        Coordinate start = new Coordinate();
+        Coordinate end = new Coordinate();
 
         if (eventX > initX) {
-            startX = initX;
-            endX = eventX;
+            start.setX(initX);
+            end.setX(eventX);
 
         } else {
-            startX = eventX;
-            endX = initX;
+            start.setX(eventX);
+            end.setX(initX);
         }
 
         if (eventY > initY) {
-            startY = initY;
-            endY = eventY;
+            start.setY(initY);
+            end.setY(eventY);
 
         } else {
-            startY = eventY;
-            endY = initY;
+            start.setY(eventY);
+            end.setY(initY);
+
         }
 
+        if (PrisonSimulation.currentState == State.BUILD_WALL) {
 
-        for (int i = startX; i <= endX; i++) {
-            for (int j = startY; j <= endY; j++)
-                try {
-                    blockManager.getBlock(new Coordinate(i, j)).addPreview(new Preview());
-                    tempBlocks.add(blockManager.getBlock(new Coordinate(i, j)));
-                } catch (MultiplePreviewError ignored) {
-                }
+            createJob(start, end);
+
+
         }
 
         repaint();
 
 
+    }
+
+    private void createJob(Coordinate start, Coordinate end) {
+
+        for (int i = start.getX(); i <= end.getX(); i++) {
+            for (int j = start.getY(); j <= end.getY(); j++)
+                try {
+                    if (i == start.getX() || i == end.getX() || j == start.getY() || j == end.getY()) {
+
+
+                        blockManager.getBlock(new Coordinate(i, j)).addPreview(new Preview());
+                        tempBlocks.add(blockManager.getBlock(new Coordinate(i, j)));
+                    }
+
+                } catch (MultiplePreviewError ignored) {
+                }
+        }
     }
 
     @Override

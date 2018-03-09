@@ -1,18 +1,18 @@
+package block;
+
 import base.Coordinate;
-import block.Block;
-import block.OpenSpace;
 
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-class BlockManager {
+public class BlockManager {
 
     private Map<Integer, Block> blocks;
     private int boardWidth;
     private int boardHeight;
 
-    BlockManager(int boardWidth, int boardHeight) {
+    public BlockManager(int boardWidth, int boardHeight) {
         this.boardWidth = boardWidth;
         this.boardHeight = boardHeight;
         blocks = new HashMap<>();

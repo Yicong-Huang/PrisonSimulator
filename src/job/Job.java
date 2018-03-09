@@ -1,4 +1,5 @@
-import job.JobType;
+package job;
+
 import location.Location;
 
 public class Job {
