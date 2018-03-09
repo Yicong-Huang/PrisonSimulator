@@ -42,6 +42,23 @@ public class Job {
         this.location = location;
     }
 
+
+    public boolean isInProgress() {
+        return inProgress;
+    }
+
+    public void setInProgress(boolean inProgress) {
+        this.inProgress = inProgress;
+    }
+
+    public boolean isCanBeDone() {
+        return canBeDone;
+    }
+
+    public void setCanBeDone(boolean canBeDone) {
+        this.canBeDone = canBeDone;
+    }
+
     @Override
     public String toString() {
         return "Job{" +

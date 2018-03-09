@@ -28,4 +28,12 @@ public class JobManager {
         jobs = new LinkedList<Job>();
 
     }
+
+    public Job poll() {
+        return jobs.poll();
+    }
+
+    public Job peek() {
+        return jobs.peek();
+    }
 }

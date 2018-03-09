@@ -2,6 +2,7 @@ package base;
 
 import block.Block;
 import block.BlockManager;
+import character.CharacterManager;
 import exception.MultiplePreviewError;
 import job.Job;
 import job.JobType;
@@ -20,6 +21,7 @@ public class GameBoard extends JPanel implements MouseInputListener {
     private static final int BOARD_WIDTH = 20;
     private static final int BOARD_HEIGHT = 20;
     private BlockManager blockManager;
+    private CharacterManager characterManager;
 
     private Coordinate temp;
 
@@ -31,7 +33,7 @@ public class GameBoard extends JPanel implements MouseInputListener {
         setFocusable(true);
 
         blockManager = new BlockManager(BOARD_WIDTH, BOARD_HEIGHT);
-        setBounds(0, 0, 400, 400);
+        setBounds(0, 0, BOARD_WIDTH * Block.WIDTH, BOARD_HEIGHT * Block.HEIGHT);
 
         addMouseListener(this);
         addMouseMotionListener(this);
@@ -49,12 +51,11 @@ public class GameBoard extends JPanel implements MouseInputListener {
             int x = block.getX();
             int y = block.getY();
             g2d.setColor(block.getColor());
-            g2d.fill3DRect(x, y, 20, 20, false);
+            g2d.fill3DRect(x, y, Block.WIDTH, Block.HEIGHT, false);
             g2d.setColor(Color.BLACK);
-            g2d.draw3DRect(x, y, 20, 20, false);
+            g2d.draw3DRect(x, y, Block.WIDTH, Block.HEIGHT, false);
 
         }
-//        System.out.println(blockManager.getBlocks().size());
 
 
     }
@@ -68,7 +69,7 @@ public class GameBoard extends JPanel implements MouseInputListener {
     @Override
     public void mousePressed(MouseEvent e) {
 //        System.out.println("in GameBoard Press");
-        temp = new Coordinate(e.getX() / 20, e.getY() / 20);
+        temp = new Coordinate(e.getX() / Block.WIDTH, e.getY() / Block.HEIGHT);
 
 
     }
