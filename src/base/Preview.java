@@ -9,7 +9,6 @@ public class Preview {
 
     }
 
-
     public Color getColor() {
         return color;
     }

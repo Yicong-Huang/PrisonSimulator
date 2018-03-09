@@ -29,7 +29,6 @@ public abstract class Block {
 
     public abstract void addPreview(Preview preview) throws MultiplePreviewError;
 
-
     public abstract void removePreview();
 
 

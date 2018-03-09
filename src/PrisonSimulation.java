@@ -1,12 +1,18 @@
+import menu.MenuBar;
+
 import javax.swing.*;
+import java.awt.*;
 
 class PrisonSimulation extends JFrame {
 
     PrisonSimulation() {
-        add(new GameBoard());
+        add(new GameBoard(), BorderLayout.NORTH);
+        add(new MenuBar(), BorderLayout.SOUTH);
 
-        setSize(800, 600);
+        setSize(400, 500);
         setResizable(false);
+        setLayout(null);
+
 
         setTitle("Prison Simulator");
         setLocationRelativeTo(null);

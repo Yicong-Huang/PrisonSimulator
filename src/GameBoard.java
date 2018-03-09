@@ -26,9 +26,11 @@ public class GameBoard extends JPanel implements MouseInputListener {
         setFocusable(true);
 
         blockManager = new BlockManager(BOARD_WIDTH, BOARD_HEIGHT);
+        setBounds(0, 0, 400, 400);
 
         addMouseListener(this);
         addMouseMotionListener(this);
+
 
     }
 
@@ -54,13 +56,13 @@ public class GameBoard extends JPanel implements MouseInputListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-
+//        System.out.println("in GameBoard Click");
 
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
-
+//        System.out.println("in GameBoard Press");
         temp = new Coordinate(e.getX() / 20, e.getY() / 20);
 
 
@@ -69,24 +71,27 @@ public class GameBoard extends JPanel implements MouseInputListener {
     @Override
     public void mouseReleased(MouseEvent e) {
 
+//        System.out.println("in GameBoard Release");
         tempBlocks = null;
 
     }
 
     @Override
     public void mouseEntered(MouseEvent e) {
+//        System.out.println("in GameBoard Enter");
 
 
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-
+//        System.out.println("in GameBoard Exit");
     }
 
 
     @Override
     public void mouseDragged(MouseEvent e) {
+//        System.out.println("in GameBoard Drag");
         if (tempBlocks != null) {
             for (Block block : tempBlocks) {
                 block.removePreview();
@@ -135,6 +140,7 @@ public class GameBoard extends JPanel implements MouseInputListener {
 
     @Override
     public void mouseMoved(MouseEvent e) {
+//        System.out.println("in GameBoard Move");
 
     }
 }
