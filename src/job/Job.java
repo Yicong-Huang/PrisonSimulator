@@ -1,21 +1,21 @@
 package job;
 
-import location.Location;
+import base.Coordinate;
 
 public class Job {
 
     private long id;
     private JobType jobType;
-    private Location location;
+    private Coordinate coordinate;
 
     private boolean inProgress = false;
     private boolean canBeDone = false;
 
-    public Job(JobType jobType, Location location) {
+    public Job(JobType jobType, Coordinate coordinate) {
 
         this.id = JobManager.jobId++;
         this.jobType = jobType;
-        this.location = location;
+        this.coordinate = coordinate;
     }
 
     public long getId() {
@@ -34,14 +34,13 @@ public class Job {
         this.jobType = jobType;
     }
 
-    public Location getLocation() {
-        return location;
+    public Coordinate getCoordinate() {
+        return coordinate;
     }
 
-    public void setLocation(Location location) {
-        this.location = location;
+    public void setCoordinate(Coordinate coordinate) {
+        this.coordinate = coordinate;
     }
-
 
     public boolean isInProgress() {
         return inProgress;
@@ -64,7 +63,7 @@ public class Job {
         return "Job{" +
                 "id=" + id +
                 ", jobType=" + jobType +
-                ", location=" + location +
+                ", coordinate=" + coordinate +
                 ", inProgress=" + inProgress +
                 ", canBeDone=" + canBeDone +
                 '}';

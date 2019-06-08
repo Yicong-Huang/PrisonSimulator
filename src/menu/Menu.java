@@ -4,6 +4,7 @@ package menu;
 import base.PrisonSimulation;
 import base.State;
 import base.start;
+import character.Worker;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -28,12 +29,20 @@ public class Menu extends JButton implements ActionListener {
 
         } else if (e.getActionCommand().equals("Selector")) {
             PrisonSimulation.currentState = State.BUILD_WALL;
+
         } else if (e.getActionCommand().equals("Reload Simulation")) {
             start.prisonSimulation.dispatchEvent(new WindowEvent(start.prisonSimulation, WindowEvent.WINDOW_CLOSING));
 
 
             start.main(new String[]{});
             PrisonSimulation.jobManager.reSet();
+            PrisonSimulation.simClock.interrupt();
+            for (Worker worker : PrisonSimulation.characterManager.getWorkers()) {
+                worker.interrupt();
+
+            }
+            PrisonSimulation.characterManager.getWorkers().clear();
+
         }
     }
 }

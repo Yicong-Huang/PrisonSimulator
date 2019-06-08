@@ -2,11 +2,9 @@ package base;
 
 import block.Block;
 import block.BlockManager;
-import character.CharacterManager;
 import exception.MultiplePreviewError;
 import job.Job;
 import job.JobType;
-import location.Location;
 
 import javax.swing.*;
 import javax.swing.event.MouseInputListener;
@@ -21,7 +19,6 @@ public class GameBoard extends JPanel implements MouseInputListener {
     private static final int BOARD_WIDTH = 20;
     private static final int BOARD_HEIGHT = 20;
     private BlockManager blockManager;
-    private CharacterManager characterManager;
 
     private Coordinate temp;
 
@@ -47,16 +44,9 @@ public class GameBoard extends JPanel implements MouseInputListener {
         super.paintComponent(g);
 
         Graphics2D g2d = (Graphics2D) g;
-        for (Block block : blockManager.getBlocks()) {
-            int x = block.getX();
-            int y = block.getY();
-            g2d.setColor(block.getColor());
-            g2d.fill3DRect(x, y, Block.WIDTH, Block.HEIGHT, false);
-            g2d.setColor(Color.BLACK);
-            g2d.draw3DRect(x, y, Block.WIDTH, Block.HEIGHT, false);
 
-        }
-
+        blockManager.update(g2d);
+        PrisonSimulation.characterManager.update(g2d);
 
     }
 
@@ -78,12 +68,14 @@ public class GameBoard extends JPanel implements MouseInputListener {
     public void mouseReleased(MouseEvent e) {
 
 //        System.out.println("in GameBoard Release");
+//        synchronized (jobManager) {
         for (Block block : tempBlocks) {
 
-            PrisonSimulation.jobManager.add(new Job(JobType.BUILD, new Location(block.getCoordinate())));
+            PrisonSimulation.jobManager.add(new Job(JobType.BUILD, block.getCoordinate()));
         }
         System.out.println(PrisonSimulation.jobManager);
         tempBlocks = null;
+//        }
 
     }
 

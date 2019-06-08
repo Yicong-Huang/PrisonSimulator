@@ -34,4 +34,14 @@ public abstract class Block {
     public abstract void removePreview();
 
 
+    public void paintComponent(Graphics2D g2d) {
+        int x = getX();
+        int y = getY();
+        g2d.setColor(getColor());
+        g2d.fill3DRect(x, y, Block.WIDTH, Block.HEIGHT, false);
+        g2d.setColor(Color.BLACK);
+        g2d.draw3DRect(x, y, Block.WIDTH, Block.HEIGHT, false);
+    }
+
+
 }
